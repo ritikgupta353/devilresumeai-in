@@ -4,1062 +4,1089 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume With Devil AI – Build Your Professional Resume & Portfolio in Minutes</title>
     <meta name="description"
-        content="Create a stunning professional resume and portfolio website in minutes using Resume With Devil AI. Fill out a simple form and let AI do the rest. Download PDF instantly.">
+        content="AI Resume & Portfolio Builder — Create professional resumes and portfolios in minutes with AI-powered suggestions.">
+    <title>AI Resume & Portfolio Builder</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-    <!-- ===== NAVIGATION ===== -->
+    <!-- ==================== NAVBAR ==================== -->
     <nav class="navbar" id="navbar">
-        <div class="nav-brand">
-            <div class="brand-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="url(#g1)" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round" />
-                    <defs>
-                        <linearGradient id="g1" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#00d4ff" />
-                            <stop offset="1" stop-color="#7c3aed" />
-                        </linearGradient>
-                    </defs>
-                </svg>
+        <div class="nav-container">
+            <a href="#" class="nav-logo" id="nav-logo">
+                <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                <span>Resume<span class="accent">AI</span></span>
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
+                <li><a href="#features" class="nav-link" data-section="features">Features</a></li>
+                <li><a href="#builder" class="nav-link" data-section="builder">Builder</a></li>
+                <li><a href="#templates" class="nav-link" data-section="templates">Templates</a></li>
+                <li><a href="#tools" class="nav-link" data-section="tools">Tools</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn btn-outline btn-sm" id="btn-theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="btn btn-glass btn-sm" id="btn-open-signin">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
+                <button class="btn btn-primary btn-sm" id="btn-open-signup">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </button>
             </div>
-            <span class="brand-name">Resume With Devil<span class="brand-ai"> AI</span></span>
-        </div>
-        <div class="nav-links" id="nav-links">
-            <a href="#features" class="nav-link">Features</a>
-            <a href="#templates-section" class="nav-link">Templates</a>
-            <a href="#how-it-works" class="nav-link">How it Works</a>
-        </div>
-        <div class="nav-auth" id="nav-auth-area">
-            <div id="nav-guest-btns">
-                <button class="btn-ghost btn-sm" onclick="openAuthModal('signin')">Log In</button>
-                <button class="btn-primary btn-sm" onclick="openAuthModal('signup')">Sign Up Free</button>
-            </div>
-            <div id="nav-user-area" style="display:none">
-                <div class="nav-user-chip" onclick="toggleUserDropdown()">
-                    <div class="nav-user-avatar" id="nav-avatar-circle">U</div>
-                    <span id="nav-user-name-label">User</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9" />
-                    </svg>
-                </div>
-                <div class="user-dropdown" id="user-dropdown">
-                    <div class="user-dropdown-info">
-                        <div class="user-dd-avatar" id="dd-avatar">U</div>
-                        <div>
-                            <div class="user-dd-name" id="dd-name">User</div>
-                            <div class="user-dd-email" id="dd-email">user@email.com</div>
-                        </div>
-                    </div>
-                    <hr class="user-dd-divider">
-                    <button class="user-dd-btn" onclick="showView('builder'); toggleUserDropdown()">🚀 Build
-                        Resume</button>
-                    <button class="user-dd-btn logout" onclick="doLogout()">↩ Sign Out</button>
-                </div>
-            </div>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
-    <!-- ===== VIEW: LANDING ===== -->
-    <div id="view-landing" class="view active">
-
-        <!-- HERO -->
-        <section class="hero" id="hero">
-            <canvas id="particles-canvas" class="particles-canvas"></canvas>
-            <div class="hero-glow-1"></div>
-            <div class="hero-glow-2"></div>
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span class="badge-pulse"></span>
-                    Resume With Devil AI &nbsp;·&nbsp; Free to Use &nbsp;·&nbsp; Instant PDF
+    <!-- ==================== HERO / LANDING ==================== -->
+    <section class="hero" id="home">
+        <div class="hero-bg-effects">
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+            <div class="hero-orb hero-orb-3"></div>
+            <div class="hero-grid"></div>
+        </div>
+        <div class="hero-content container">
+            <div class="hero-badge animate-fade-up">
+                <i class="fas fa-sparkles"></i> AI-Powered Resume Builder
+            </div>
+            <h1 class="hero-title animate-fade-up delay-1">
+                Build Your <span class="gradient-text">Dream Resume</span><br>
+                & Portfolio in Minutes
+            </h1>
+            <p class="hero-subtitle animate-fade-up delay-2">
+                Transform your career story into a stunning, professional resume and portfolio website.
+                Just fill in your details — our AI handles the rest.
+            </p>
+            <div class="hero-cta animate-fade-up delay-3">
+                <a href="#builder" class="btn btn-primary btn-lg" id="hero-cta-build">
+                    <i class="fas fa-rocket"></i> Start Building Free
+                </a>
+                <a href="#features" class="btn btn-glass btn-lg" id="hero-cta-learn">
+                    <i class="fas fa-play-circle"></i> See How It Works
+                </a>
+            </div>
+            <div class="hero-stats animate-fade-up delay-4">
+                <div class="stat-item">
+                    <span class="stat-num" data-count="10000">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Resumes Created</span>
                 </div>
-                <h1 class="hero-title">
-                    Your Dream Resume,<br>
-                    <span class="gradient-text">Built in Minutes</span>
-                </h1>
-                <p class="hero-subtitle">
-                    Fill out a guided form in plain English and our AI instantly crafts a polished professional resume
-                    and personal portfolio — ready to download and share.
-                </p>
-                <div class="hero-actions">
-                    <button class="btn-primary btn-xl" id="hero-start-btn" onclick="showView('builder')">
-                        Start Building Free
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                    <button class="btn-ghost btn-xl" id="hero-demo-btn">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M5 3l14 9-14 9V3z" />
-                        </svg>
-                        Watch Demo
-                    </button>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-num" data-count="50">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Templates</span>
                 </div>
-                <div class="hero-stats">
-                    <div class="stat-item"><strong>10,000+</strong><span>Resumes Created</span></div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item"><strong>3</strong><span>Pro Templates</span></div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item"><strong>1-Click</strong><span>PDF Download</span></div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item"><strong>100%</strong><span>ATS Friendly</span></div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-num" data-count="98">0</span><span class="stat-suffix">%</span>
+                    <span class="stat-label">Satisfaction</span>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="resume-mockup" id="hero-mockup">
-                    <div class="mockup-header">
-                        <div class="mockup-avatar"></div>
-                        <div>
-                            <div class="mockup-line wide dark"></div>
-                            <div class="mockup-line medium"></div>
-                        </div>
-                    </div>
-                    <div class="mockup-section">
-                        <div class="mockup-section-title">EXPERIENCE</div>
-                        <div class="mockup-line wide"></div>
-                        <div class="mockup-line medium"></div>
-                        <div class="mockup-line short"></div>
-                    </div>
-                    <div class="mockup-section">
-                        <div class="mockup-section-title">SKILLS</div>
-                        <div class="mockup-tags">
-                            <div class="mockup-tag"></div>
-                            <div class="mockup-tag short"></div>
-                            <div class="mockup-tag medium"></div>
-                        </div>
-                    </div>
-                    <div class="mockup-section">
-                        <div class="mockup-section-title">EDUCATION</div>
-                        <div class="mockup-line wide"></div>
-                        <div class="mockup-line short"></div>
-                    </div>
-                    <div class="mockup-ai-badge">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="#00d4ff">
-                            <path
-                                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        AI Enhanced
-                    </div>
-                </div>
-                <div class="floating-chip chip-1">✓ ATS Optimized</div>
-                <div class="floating-chip chip-2">📄 PDF Ready</div>
-                <div class="floating-chip chip-3">🌐 Portfolio Live</div>
-            </div>
-        </section>
+        </div>
+        <div class="hero-scroll-indicator animate-fade-up delay-5">
+            <span>Scroll to explore</span>
+            <div class="scroll-arrow"><i class="fas fa-chevron-down"></i></div>
+        </div>
+    </section>
 
-        <!-- FEATURES -->
-        <section class="features-section" id="features">
-            <div class="section-header reveal">
-                <div class="section-tag">Why ResumeAI</div>
-                <h2>Everything you need to land the job</h2>
-                <p>From blank page to job-ready in under 10 minutes</p>
+    <!-- ==================== FEATURES ==================== -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag"><i class="fas fa-star"></i> Why Choose Us</span>
+                <h2 class="section-title">Everything You Need to <span class="gradient-text">Stand Out</span></h2>
+                <p class="section-subtitle">Powerful features designed to make your job search easier and more
+                    effective.</p>
             </div>
             <div class="features-grid">
-                <div class="feature-card reveal">
-                    <div class="feature-icon" style="--icon-color: #00d4ff;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M9 11l3 3L22 4" />
-                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
-                        </svg>
-                    </div>
-                    <h3>Step-by-Step Form</h3>
-                    <p>Our guided 7-step form walks you through every section — no blank staring at an empty page.</p>
+                <div class="feature-card" id="feature-ai">
+                    <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                    <h3>AI-Powered Suggestions</h3>
+                    <p>Get intelligent recommendations for skills, achievements, and professional summaries tailored to
+                        your industry.</p>
                 </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon" style="--icon-color: #7c3aed;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path
-                                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                    </div>
-                    <h3>AI Enhancement</h3>
-                    <p>Get instant AI suggestions to polish your bullet points and make your experience sound
-                        impressive.</p>
+                <div class="feature-card" id="feature-templates">
+                    <div class="feature-icon"><i class="fas fa-palette"></i></div>
+                    <h3>Multiple Templates</h3>
+                    <p>Choose from beautifully designed resume templates — modern, classic, creative, and minimalist
+                        styles.</p>
                 </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon" style="--icon-color: #f59e0b;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <rect x="3" y="3" width="18" height="18" rx="2" />
-                            <path d="M3 9h18M9 21V9" />
-                        </svg>
-                    </div>
-                    <h3>3 Pro Templates</h3>
-                    <p>Choose from Nexus, Clarity, and Canvas — all ATS-friendly and employer-approved designs.</p>
-                </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon" style="--icon-color: #10b981;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-                            <polyline points="7 10 12 15 17 10" />
-                            <line x1="12" y1="15" x2="12" y2="3" />
-                        </svg>
-                    </div>
+                <div class="feature-card" id="feature-pdf">
+                    <div class="feature-icon"><i class="fas fa-file-pdf"></i></div>
                     <h3>PDF Download</h3>
-                    <p>Download a pixel-perfect PDF resume instantly. Print-ready and digitally shareable.</p>
+                    <p>Export your resume as a pixel-perfect PDF, ready to send to recruiters and hiring managers
+                        instantly.</p>
                 </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon" style="--icon-color: #ef4444;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <circle cx="12" cy="12" r="10" />
-                            <path
-                                d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
-                        </svg>
-                    </div>
-                    <h3>Portfolio Website</h3>
-                    <p>Auto-generate a beautiful portfolio webpage with About, Projects, Skills, and Contact sections.
-                    </p>
+                <div class="feature-card" id="feature-portfolio">
+                    <div class="feature-icon"><i class="fas fa-globe"></i></div>
+                    <h3>Portfolio Generator</h3>
+                    <p>Automatically generate a beautiful personal portfolio website from the same information you
+                        provide.</p>
                 </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon" style="--icon-color: #0066ff;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
-                            <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
-                        </svg>
-                    </div>
-                    <h3>Edit Anytime</h3>
-                    <p>Made a mistake? Go back, edit your details, and regenerate your resume with one click.</p>
+                <div class="feature-card" id="feature-mobile">
+                    <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Build and preview your resume on any device. Our responsive design works flawlessly on phones and
+                        tablets.</p>
+                </div>
+                <div class="feature-card" id="feature-edit">
+                    <div class="feature-icon"><i class="fas fa-edit"></i></div>
+                    <h3>Edit & Regenerate</h3>
+                    <p>Easily update your resume anytime and regenerate with one click. Your data is always saved
+                        locally.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- HOW IT WORKS -->
-        <section class="how-section" id="how-it-works">
-            <div class="section-header reveal">
-                <div class="section-tag">Process</div>
-                <h2>Three steps to your perfect resume</h2>
-                <p>No design skills needed. No guessing. Just results.</p>
+    <!-- ==================== BUILDER (Multi-Step Form) ==================== -->
+    <section class="builder" id="builder">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag"><i class="fas fa-wand-magic-sparkles"></i> Resume Builder</span>
+                <h2 class="section-title">Build Your <span class="gradient-text">Professional Resume</span></h2>
+                <p class="section-subtitle">Follow the steps below to craft a stunning resume in plain English.</p>
             </div>
-            <div class="process-row">
-                <div class="process-card reveal">
-                    <div class="process-number">01</div>
-                    <div class="process-icon-wrap">📝</div>
-                    <h3>Fill Your Details</h3>
-                    <p>Enter your information in plain English through our clean guided form. We handle the formatting.
-                    </p>
-                </div>
-                <div class="process-connector reveal"></div>
-                <div class="process-card reveal">
-                    <div class="process-number">02</div>
-                    <div class="process-icon-wrap">✨</div>
-                    <h3>AI Enhances It</h3>
-                    <p>Our AI analyzes your content and suggests powerful improvements — stronger verbs, quantified
-                        results.</p>
-                </div>
-                <div class="process-connector reveal"></div>
-                <div class="process-card reveal">
-                    <div class="process-number">03</div>
-                    <div class="process-icon-wrap">🚀</div>
-                    <h3>Download & Share</h3>
-                    <p>Get your PDF resume instantly. Your portfolio goes live as a shareable webpage automatically.</p>
-                </div>
-            </div>
-        </section>
 
-        <!-- TEMPLATES SECTION -->
-        <section class="templates-section" id="templates-section">
-            <div class="section-header reveal">
-                <div class="section-tag">Templates</div>
-                <h2>Professional templates that get noticed</h2>
-                <p>Three distinct styles — all recruiter-approved and ATS-optimized</p>
+            <!-- Progress Bar -->
+            <div class="progress-wrapper" id="progress-wrapper">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width:14.28%"></div>
+                </div>
+                <div class="progress-steps">
+                    <div class="progress-step active" data-step="1"><span>1</span><small>Personal</small></div>
+                    <div class="progress-step" data-step="2"><span>2</span><small>Education</small></div>
+                    <div class="progress-step" data-step="3"><span>3</span><small>Skills</small></div>
+                    <div class="progress-step" data-step="4"><span>4</span><small>Experience</small></div>
+                    <div class="progress-step" data-step="5"><span>5</span><small>Projects</small></div>
+                    <div class="progress-step" data-step="6"><span>6</span><small>Certifications</small></div>
+                    <div class="progress-step" data-step="7"><span>7</span><small>Review</small></div>
+                </div>
             </div>
-            <div class="template-showcase">
-                <div class="template-showcase-card reveal active-template" data-template="nexus">
-                    <div class="template-thumb nexus-thumb">
-                        <div class="thumb-sidebar">
-                            <div class="thumb-avatar"></div>
-                            <div class="thumb-line short"></div>
-                            <div class="thumb-line medium"></div>
-                            <div class="thumb-divider"></div>
-                            <div class="thumb-line short"></div>
-                            <div class="thumb-line short"></div>
-                            <div class="thumb-line short"></div>
-                        </div>
-                        <div class="thumb-main">
-                            <div class="thumb-line wide dark"></div>
-                            <div class="thumb-line medium"></div>
-                            <div class="thumb-section-title"></div>
-                            <div class="thumb-line wide"></div>
-                            <div class="thumb-line medium"></div>
-                            <div class="thumb-section-title"></div>
-                            <div class="thumb-line wide"></div>
-                            <div class="thumb-line short"></div>
+
+            <!-- Form Steps -->
+            <form class="builder-form" id="builder-form" autocomplete="off">
+                <!-- STEP 1: Personal Info -->
+                <div class="form-step active" data-step="1" id="step-1">
+                    <div class="step-header">
+                        <div class="step-icon"><i class="fas fa-user"></i></div>
+                        <div>
+                            <h3>Personal Information</h3>
+                            <p>Tell us about yourself — this will appear at the top of your resume.</p>
                         </div>
                     </div>
-                    <div class="template-info">
-                        <div class="template-name">Nexus</div>
-                        <div class="template-desc">Modern · Two-column with bold sidebar</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fullName"><i class="fas fa-id-badge"></i> Full Name *</label>
+                            <input type="text" id="fullName" placeholder="e.g. John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="jobTitle"><i class="fas fa-briefcase"></i> Job Title *</label>
+                            <input type="text" id="jobTitle" placeholder="e.g. Full Stack Developer" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><i class="fas fa-envelope"></i> Email *</label>
+                            <input type="email" id="email" placeholder="e.g. john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone"><i class="fas fa-phone"></i> Phone</label>
+                            <input type="tel" id="phone" placeholder="e.g. +1 234 567 8900">
+                        </div>
+                        <div class="form-group">
+                            <label for="location"><i class="fas fa-map-marker-alt"></i> Location</label>
+                            <input type="text" id="location" placeholder="e.g. San Francisco, CA">
+                        </div>
+                        <div class="form-group">
+                            <label for="website"><i class="fas fa-globe"></i> Website / LinkedIn</label>
+                            <input type="url" id="website" placeholder="e.g. https://linkedin.com/in/johndoe">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="summary"><i class="fas fa-align-left"></i> Professional Summary *</label>
+                            <textarea id="summary" rows="4"
+                                placeholder="Write a brief summary about yourself, your career goals, and what makes you unique..."
+                                required></textarea>
+                            <button type="button" class="btn-ai-suggest" id="btn-ai-summary" title="AI Enhance">
+                                <i class="fas fa-wand-magic-sparkles"></i> AI Enhance
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="template-showcase-card reveal" data-template="clarity">
-                    <div class="template-thumb clarity-thumb">
-                        <div class="thumb-inner">
-                            <div class="thumb-header-row">
-                                <div>
-                                    <div class="thumb-line wide dark"></div>
-                                    <div class="thumb-line medium"></div>
+
+                <!-- STEP 2: Education -->
+                <div class="form-step" data-step="2" id="step-2">
+                    <div class="step-header">
+                        <div class="step-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div>
+                            <h3>Education</h3>
+                            <p>Add your academic background. You can add multiple entries.</p>
+                        </div>
+                    </div>
+                    <div id="education-entries">
+                        <div class="entry-card" data-entry="education-0">
+                            <div class="entry-card-header">
+                                <span><i class="fas fa-graduation-cap"></i> Education #1</span>
+                                <button type="button" class="btn-remove-entry" title="Remove" style="display:none"><i
+                                        class="fas fa-trash-alt"></i></button>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Degree *</label>
+                                    <input type="text" name="edu-degree" placeholder="e.g. B.Tech in Computer Science"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Institution *</label>
+                                    <input type="text" name="edu-institution" placeholder="e.g. MIT" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Year / Duration</label>
+                                    <input type="text" name="edu-year" placeholder="e.g. 2019 – 2023">
+                                </div>
+                                <div class="form-group">
+                                    <label>Grade / GPA</label>
+                                    <input type="text" name="edu-grade" placeholder="e.g. 3.8 / 4.0">
                                 </div>
                             </div>
-                            <div class="thumb-hr"></div>
-                            <div class="thumb-section-title clarity"></div>
-                            <div class="thumb-line wide"></div>
-                            <div class="thumb-line medium"></div>
-                            <div class="thumb-section-title clarity"></div>
-                            <div class="thumb-line wide"></div>
-                            <div class="thumb-line short"></div>
                         </div>
                     </div>
-                    <div class="template-info">
-                        <div class="template-name">Clarity</div>
-                        <div class="template-desc">Classic · Single-column, timeless style</div>
+                    <button type="button" class="btn btn-outline btn-add" id="btn-add-education">
+                        <i class="fas fa-plus"></i> Add Another Education
+                    </button>
+                </div>
+
+                <!-- STEP 3: Skills -->
+                <div class="form-step" data-step="3" id="step-3">
+                    <div class="step-header">
+                        <div class="step-icon"><i class="fas fa-code"></i></div>
+                        <div>
+                            <h3>Skills</h3>
+                            <p>List your technical and soft skills. Separate them with commas.</p>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="technicalSkills"><i class="fas fa-laptop-code"></i> Technical Skills *</label>
+                            <textarea id="technicalSkills" rows="3"
+                                placeholder="e.g. JavaScript, React, Node.js, Python, SQL, Docker, AWS..."
+                                required></textarea>
+                            <button type="button" class="btn-ai-suggest" id="btn-ai-skills" title="AI Suggest Skills">
+                                <i class="fas fa-wand-magic-sparkles"></i> AI Suggest
+                            </button>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="softSkills"><i class="fas fa-users"></i> Soft Skills</label>
+                            <textarea id="softSkills" rows="3"
+                                placeholder="e.g. Leadership, Communication, Problem Solving, Team Collaboration..."></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="languages"><i class="fas fa-language"></i> Languages</label>
+                            <input type="text" id="languages"
+                                placeholder="e.g. English (Fluent), Spanish (Intermediate), Hindi (Native)">
+                        </div>
                     </div>
                 </div>
-                <div class="template-showcase-card reveal" data-template="canvas">
-                    <div class="template-thumb canvas-thumb">
-                        <div class="thumb-inner">
-                            <div class="thumb-canvas-name"></div>
-                            <div class="thumb-canvas-title"></div>
-                            <div class="thumb-section-title canvas"></div>
-                            <div class="thumb-line wide"></div>
-                            <div class="thumb-line medium"></div>
-                            <div class="thumb-section-title canvas"></div>
-                            <div class="thumb-line wide"></div>
-                            <div class="thumb-line short"></div>
-                            <div class="thumb-tags-row">
-                                <div class="thumb-tag"></div>
-                                <div class="thumb-tag"></div>
-                                <div class="thumb-tag short"></div>
+
+                <!-- STEP 4: Experience -->
+                <div class="form-step" data-step="4" id="step-4">
+                    <div class="step-header">
+                        <div class="step-icon"><i class="fas fa-building"></i></div>
+                        <div>
+                            <h3>Work Experience</h3>
+                            <p>Describe your professional experience. Use plain English — our AI will format it.</p>
+                        </div>
+                    </div>
+                    <div id="experience-entries">
+                        <div class="entry-card" data-entry="exp-0">
+                            <div class="entry-card-header">
+                                <span><i class="fas fa-building"></i> Experience #1</span>
+                                <button type="button" class="btn-remove-entry" title="Remove" style="display:none"><i
+                                        class="fas fa-trash-alt"></i></button>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Job Title *</label>
+                                    <input type="text" name="exp-title" placeholder="e.g. Software Engineer" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company *</label>
+                                    <input type="text" name="exp-company" placeholder="e.g. Google" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Duration</label>
+                                    <input type="text" name="exp-duration" placeholder="e.g. Jan 2022 – Present">
+                                </div>
+                                <div class="form-group">
+                                    <label>Location</label>
+                                    <input type="text" name="exp-location" placeholder="e.g. Mountain View, CA">
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Description</label>
+                                    <textarea name="exp-description" rows="3"
+                                        placeholder="Describe your responsibilities, achievements, and impact..."></textarea>
+                                    <button type="button" class="btn-ai-suggest btn-ai-exp" title="AI Enhance">
+                                        <i class="fas fa-wand-magic-sparkles"></i> AI Enhance
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="template-info">
-                        <div class="template-name">Canvas</div>
-                        <div class="template-desc">Minimal · Clean with accent borders</div>
+                    <button type="button" class="btn btn-outline btn-add" id="btn-add-experience">
+                        <i class="fas fa-plus"></i> Add Another Experience
+                    </button>
+                </div>
+
+                <!-- STEP 5: Projects -->
+                <div class="form-step" data-step="5" id="step-5">
+                    <div class="step-header">
+                        <div class="step-icon"><i class="fas fa-diagram-project"></i></div>
+                        <div>
+                            <h3>Projects</h3>
+                            <p>Showcase your best projects and personal work.</p>
+                        </div>
+                    </div>
+                    <div id="project-entries">
+                        <div class="entry-card" data-entry="proj-0">
+                            <div class="entry-card-header">
+                                <span><i class="fas fa-diagram-project"></i> Project #1</span>
+                                <button type="button" class="btn-remove-entry" title="Remove" style="display:none"><i
+                                        class="fas fa-trash-alt"></i></button>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Project Name *</label>
+                                    <input type="text" name="proj-name" placeholder="e.g. E-Commerce Platform" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Technologies Used</label>
+                                    <input type="text" name="proj-tech" placeholder="e.g. React, Node.js, MongoDB">
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Description</label>
+                                    <textarea name="proj-description" rows="3"
+                                        placeholder="Describe the project, your role, and the outcome..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Project Link</label>
+                                    <input type="url" name="proj-link"
+                                        placeholder="e.g. https://github.com/user/project">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-outline btn-add" id="btn-add-project">
+                        <i class="fas fa-plus"></i> Add Another Project
+                    </button>
+                </div>
+
+                <!-- STEP 6: Certifications & Achievements -->
+                <div class="form-step" data-step="6" id="step-6">
+                    <div class="step-header">
+                        <div class="step-icon"><i class="fas fa-award"></i></div>
+                        <div>
+                            <h3>Certifications & Achievements</h3>
+                            <p>Highlight your certifications, awards, and notable achievements.</p>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="certifications"><i class="fas fa-certificate"></i> Certifications</label>
+                            <textarea id="certifications" rows="4"
+                                placeholder="List your certifications, one per line. e.g.&#10;AWS Solutions Architect – Amazon (2023)&#10;Google Cloud Professional – Google (2022)"></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="achievements"><i class="fas fa-trophy"></i> Achievements</label>
+                            <textarea id="achievements" rows="4"
+                                placeholder="List your achievements, one per line. e.g.&#10;Won 1st place at National Hackathon 2023&#10;Published research paper in IEEE Conference"></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="interests"><i class="fas fa-heart"></i> Interests / Hobbies</label>
+                            <input type="text" id="interests"
+                                placeholder="e.g. Open Source, Machine Learning, Photography, Hiking">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="templates-cta reveal">
-                <button class="btn-primary btn-lg" onclick="showView('builder')">Try All Templates Free →</button>
-            </div>
-        </section>
 
-        <!-- CTA SECTION -->
-        <section class="cta-section-full">
-            <div class="cta-glow"></div>
-            <div class="cta-content reveal">
-                <div class="section-tag">Get Started</div>
-                <h2>Ready to build your perfect resume?</h2>
-                <p>Join thousands of professionals who landed their dream job with ResumeAI</p>
-                <button class="btn-primary btn-xl" onclick="showView('builder')">Start Building — It's Free →</button>
-            </div>
-        </section>
+                <!-- STEP 7: Review & Generate -->
+                <div class="form-step" data-step="7" id="step-7">
+                    <div class="step-header">
+                        <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+                        <div>
+                            <h3>Review & Generate</h3>
+                            <p>Review your information, pick a template, and generate your resume & portfolio!</p>
+                        </div>
+                    </div>
+                    <div class="review-summary" id="review-summary">
+                        <!-- Populated by JS -->
+                    </div>
 
-        <!-- FOOTER -->
-        <footer class="site-footer">
-            <div class="footer-brand">
-                <span>Resume With Devil</span><span class="brand-ai"> AI</span>
-            </div>
-            <p>Built with <strong style="color:#00d4ff">Resume With Devil AI</strong> · Get hired faster.</p>
-            <div class="footer-links">
-                <a href="#features">Features</a>
-                <a href="#templates-section">Templates</a>
-                <a href="#how-it-works">How it Works</a>
-            </div>
+                    <!-- Template Chooser -->
+                    <div class="template-chooser" id="template-chooser-inline">
+                        <h4><i class="fas fa-palette"></i> Choose a Template</h4>
+                        <div class="template-options">
+                            <div class="template-option active" data-template="modern" id="tpl-modern">
+                                <div class="template-preview tpl-modern-preview"></div>
+                                <span>Modern</span>
+                            </div>
+                            <div class="template-option" data-template="classic" id="tpl-classic">
+                                <div class="template-preview tpl-classic-preview"></div>
+                                <span>Classic</span>
+                            </div>
+                            <div class="template-option" data-template="creative" id="tpl-creative">
+                                <div class="template-preview tpl-creative-preview"></div>
+                                <span>Creative</span>
+                            </div>
+                            <div class="template-option" data-template="minimal" id="tpl-minimal">
+                                <div class="template-preview tpl-minimal-preview"></div>
+                                <span>Minimal</span>
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- SOCIAL LINKS -->
-            <div class="footer-social">
-                <!-- Instagram -->
-                <a href="https://instagram.com" target="_blank" class="social-btn social-insta"
-                    title="Follow on Instagram" aria-label="Instagram">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2" />
-                        <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="2" />
-                        <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
-                    </svg>
-                    <span>Instagram</span>
-                </a>
+                    <div class="generate-actions">
+                        <button type="button" class="btn btn-primary btn-lg" id="btn-preview-resume">
+                            <i class="fas fa-eye"></i> Preview Resume
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-lg" id="btn-generate-portfolio">
+                            <i class="fas fa-globe"></i> Generate Portfolio
+                        </button>
+                    </div>
+                </div>
 
-                <!-- X (Twitter) -->
-                <a href="https://x.com" target="_blank" class="social-btn social-x" title="Follow on X"
-                    aria-label="X (Twitter)">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                    </svg>
-                    <span>X (Twitter)</span>
-                </a>
+                <!-- Form Navigation -->
+                <div class="form-navigation" id="form-navigation">
+                    <button type="button" class="btn btn-outline" id="btn-prev" disabled>
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btn-next">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
 
-                <!-- WhatsApp Channel -->
-                <a href="https://whatsapp.com/channel" target="_blank" class="social-btn social-wa"
-                    title="Join WhatsApp Channel" aria-label="WhatsApp Channel">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                    </svg>
-                    <span>WhatsApp Channel</span>
-                </a>
+    <!-- ==================== TEMPLATES SECTION ==================== -->
+    <section class="templates-section" id="templates">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag"><i class="fas fa-swatchbook"></i> Templates</span>
+                <h2 class="section-title">Stunning <span class="gradient-text">Resume Templates</span></h2>
+                <p class="section-subtitle">Pick the perfect design that matches your style. All templates are
+                    ATS-friendly.</p>
             </div>
-
-            <div class="footer-bottom">
-                <span>© 2025 Resume With Devil AI · All rights reserved</span>
+            <div class="templates-showcase">
+                <div class="template-showcase-card" id="showcase-modern">
+                    <div class="showcase-preview tpl-modern-preview-lg">
+                        <div class="tpl-header-bar"></div>
+                        <div class="tpl-lines"><span></span><span></span><span class="short"></span></div>
+                        <div class="tpl-lines"><span></span><span class="short"></span><span></span></div>
+                    </div>
+                    <h4>Modern</h4>
+                    <p>Clean layout with bold colors</p>
+                </div>
+                <div class="template-showcase-card" id="showcase-classic">
+                    <div class="showcase-preview tpl-classic-preview-lg">
+                        <div class="tpl-header-bar classic"></div>
+                        <div class="tpl-lines"><span></span><span></span><span class="short"></span></div>
+                        <div class="tpl-lines"><span></span><span class="short"></span><span></span></div>
+                    </div>
+                    <h4>Classic</h4>
+                    <p>Traditional & professional</p>
+                </div>
+                <div class="template-showcase-card" id="showcase-creative">
+                    <div class="showcase-preview tpl-creative-preview-lg">
+                        <div class="tpl-header-bar creative"></div>
+                        <div class="tpl-lines"><span></span><span></span><span class="short"></span></div>
+                        <div class="tpl-lines"><span></span><span class="short"></span><span></span></div>
+                    </div>
+                    <h4>Creative</h4>
+                    <p>Stand out with unique design</p>
+                </div>
+                <div class="template-showcase-card" id="showcase-minimal">
+                    <div class="showcase-preview tpl-minimal-preview-lg">
+                        <div class="tpl-header-bar minimal"></div>
+                        <div class="tpl-lines"><span></span><span></span><span class="short"></span></div>
+                        <div class="tpl-lines"><span></span><span class="short"></span><span></span></div>
+                    </div>
+                    <h4>Minimal</h4>
+                    <p>Less is more — elegant simplicity</p>
+                </div>
             </div>
-        </footer>
+        </div>
+    </section>
+
+    <!-- ==================== TOOLS SECTION ==================== -->
+    <section class="tools-section" id="tools">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag"><i class="fas fa-tools"></i> Utility Tools</span>
+                <h2 class="section-title">Free <span class="gradient-text">Image & PDF Tools</span></h2>
+                <p class="section-subtitle">Convert, resize, and transform your files instantly — right in your browser. No uploads to any server.</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card" id="tool-card-jpg2pdf">
+                    <div class="tool-card-glow"></div>
+                    <div class="tool-icon-wrap">
+                        <div class="tool-icon"><i class="fas fa-file-image"></i></div>
+                        <div class="tool-arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="tool-icon tool-icon-alt"><i class="fas fa-file-pdf"></i></div>
+                    </div>
+                    <h3>JPG to PDF</h3>
+                    <p>Convert one or multiple images into a single PDF document with custom page sizing.</p>
+                    <button class="btn btn-primary btn-sm" id="btn-open-jpg2pdf">
+                        <i class="fas fa-exchange-alt"></i> Convert Now
+                    </button>
+                </div>
+                <div class="tool-card" id="tool-card-pdf2jpg">
+                    <div class="tool-card-glow"></div>
+                    <div class="tool-icon-wrap">
+                        <div class="tool-icon tool-icon-alt"><i class="fas fa-file-pdf"></i></div>
+                        <div class="tool-arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="tool-icon"><i class="fas fa-file-image"></i></div>
+                    </div>
+                    <h3>PDF to JPG</h3>
+                    <p>Extract each page of a PDF as a high-quality JPG image. Download individually or all at once.</p>
+                    <button class="btn btn-primary btn-sm" id="btn-open-pdf2jpg">
+                        <i class="fas fa-exchange-alt"></i> Convert Now
+                    </button>
+                </div>
+                <div class="tool-card" id="tool-card-resizer">
+                    <div class="tool-card-glow"></div>
+                    <div class="tool-icon-wrap">
+                        <div class="tool-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                    </div>
+                    <h3>Image Resizer</h3>
+                    <p>Resize any image to exact dimensions or percentage. Maintain aspect ratio or set custom sizes.</p>
+                    <button class="btn btn-primary btn-sm" id="btn-open-resizer">
+                        <i class="fas fa-crop-alt"></i> Resize Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== JPG TO PDF MODAL ==================== -->
+    <div class="modal-overlay" id="jpg2pdf-modal">
+        <div class="modal-container modal-tool">
+            <div class="modal-header">
+                <h3><i class="fas fa-file-image"></i> JPG to PDF Converter</h3>
+                <button class="btn-modal-close" id="btn-close-jpg2pdf"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="tool-upload-zone" id="jpg2pdf-drop">
+                    <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <p>Drag & drop images here, or <label for="jpg2pdf-input" class="upload-browse">browse files</label></p>
+                    <span class="upload-hint">Supports JPG, PNG, WEBP — Multiple files allowed</span>
+                    <input type="file" id="jpg2pdf-input" accept="image/*" multiple hidden>
+                </div>
+                <div class="tool-preview-grid" id="jpg2pdf-preview"></div>
+                <div class="tool-options" id="jpg2pdf-options" style="display:none">
+                    <div class="tool-option-row">
+                        <label>Page Size:</label>
+                        <select id="jpg2pdf-pagesize">
+                            <option value="a4">A4</option>
+                            <option value="letter">Letter</option>
+                            <option value="fit">Fit to Image</option>
+                        </select>
+                    </div>
+                    <div class="tool-option-row">
+                        <label>Orientation:</label>
+                        <select id="jpg2pdf-orientation">
+                            <option value="portrait">Portrait</option>
+                            <option value="landscape">Landscape</option>
+                            <option value="auto">Auto (per image)</option>
+                        </select>
+                    </div>
+                    <div class="tool-option-row">
+                        <label>Quality:</label>
+                        <input type="range" id="jpg2pdf-quality" min="0.3" max="1" step="0.1" value="0.92">
+                        <span id="jpg2pdf-quality-val">92%</span>
+                    </div>
+                </div>
+                <div class="tool-action-bar" id="jpg2pdf-actions" style="display:none">
+                    <button class="btn btn-outline btn-sm" id="btn-jpg2pdf-clear"><i class="fas fa-trash-alt"></i> Clear All</button>
+                    <button class="btn btn-primary btn-lg" id="btn-jpg2pdf-convert"><i class="fas fa-magic"></i> Convert to PDF</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- ===== VIEW: BUILDER ===== -->
-    <div id="view-builder" class="view">
-        <div class="builder-topbar">
-            <button class="btn-ghost btn-sm" onclick="showView('landing')">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 12H5M12 19l-7-7 7-7" />
-                </svg>
-                Back
-            </button>
-            <div class="builder-progress-wrap">
-                <div class="progress-dots" id="progress-dots"></div>
-                <div class="progress-track">
-                    <div class="progress-fill" id="progress-fill"></div>
+    <!-- ==================== PDF TO JPG MODAL ==================== -->
+    <div class="modal-overlay" id="pdf2jpg-modal">
+        <div class="modal-container modal-tool">
+            <div class="modal-header">
+                <h3><i class="fas fa-file-pdf"></i> PDF to JPG Converter</h3>
+                <button class="btn-modal-close" id="btn-close-pdf2jpg"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="tool-upload-zone" id="pdf2jpg-drop">
+                    <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <p>Drag & drop a PDF here, or <label for="pdf2jpg-input" class="upload-browse">browse files</label></p>
+                    <span class="upload-hint">Supports PDF files up to 50MB</span>
+                    <input type="file" id="pdf2jpg-input" accept=".pdf,application/pdf" hidden>
+                </div>
+                <div class="tool-options" id="pdf2jpg-options" style="display:none">
+                    <div class="tool-option-row">
+                        <label>Output Quality:</label>
+                        <select id="pdf2jpg-scale">
+                            <option value="1">Standard (1x)</option>
+                            <option value="2" selected>High (2x)</option>
+                            <option value="3">Ultra (3x)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="tool-loading" id="pdf2jpg-loading" style="display:none">
+                    <div class="ai-spinner"></div>
+                    <p>Processing PDF pages...</p>
+                </div>
+                <div class="tool-preview-grid tool-preview-large" id="pdf2jpg-preview"></div>
+                <div class="tool-action-bar" id="pdf2jpg-actions" style="display:none">
+                    <button class="btn btn-outline btn-sm" id="btn-pdf2jpg-clear"><i class="fas fa-trash-alt"></i> Clear</button>
+                    <button class="btn btn-primary btn-lg" id="btn-pdf2jpg-download-all"><i class="fas fa-download"></i> Download All as ZIP</button>
                 </div>
             </div>
-            <span class="step-counter" id="step-counter">Step 1 of 7</span>
         </div>
+    </div>
 
-        <div class="builder-body">
-            <!-- STEP 1: PERSONAL INFO -->
-            <div class="form-step active" id="step-1">
-                <div class="step-header">
-                    <div class="step-emoji">👤</div>
-                    <h2>Personal Information</h2>
-                    <p>Let's start with the basics. This appears at the top of your resume.</p>
+    <!-- ==================== IMAGE RESIZER MODAL ==================== -->
+    <div class="modal-overlay" id="resizer-modal">
+        <div class="modal-container modal-tool">
+            <div class="modal-header">
+                <h3><i class="fas fa-expand-arrows-alt"></i> Image Resizer</h3>
+                <button class="btn-modal-close" id="btn-close-resizer"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="tool-upload-zone" id="resizer-drop">
+                    <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <p>Drag & drop an image here, or <label for="resizer-input" class="upload-browse">browse files</label></p>
+                    <span class="upload-hint">Supports JPG, PNG, WEBP</span>
+                    <input type="file" id="resizer-input" accept="image/*" hidden>
                 </div>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="f-name">Full Name <span class="required">*</span></label>
-                        <input type="text" id="f-name" placeholder="e.g. Jane Smith" autocomplete="name">
+                <div class="resizer-workspace" id="resizer-workspace" style="display:none">
+                    <div class="resizer-preview-wrap">
+                        <img id="resizer-preview-img" alt="Preview">
+                        <div class="resizer-info" id="resizer-original-info"></div>
                     </div>
-                    <div class="form-group">
-                        <label for="f-title">Job Title / Headline <span class="required">*</span></label>
-                        <input type="text" id="f-title" placeholder="e.g. Senior Software Engineer">
+                    <div class="resizer-controls">
+                        <h4><i class="fas fa-sliders-h"></i> Resize Options</h4>
+                        <div class="resizer-mode-tabs">
+                            <button class="resizer-mode-tab active" data-mode="pixels" id="resize-mode-pixels">Pixels</button>
+                            <button class="resizer-mode-tab" data-mode="percent" id="resize-mode-percent">Percentage</button>
+                        </div>
+                        <div class="resizer-inputs" id="resize-pixels-inputs">
+                            <div class="form-group">
+                                <label>Width (px)</label>
+                                <input type="number" id="resize-width" min="1" max="10000" placeholder="Width">
+                            </div>
+                            <div class="form-group">
+                                <label>Height (px)</label>
+                                <input type="number" id="resize-height" min="1" max="10000" placeholder="Height">
+                            </div>
+                        </div>
+                        <div class="resizer-inputs" id="resize-percent-inputs" style="display:none">
+                            <div class="form-group" style="grid-column:1/-1">
+                                <label>Scale (%)</label>
+                                <input type="number" id="resize-percent" min="1" max="500" value="100" placeholder="100">
+                            </div>
+                        </div>
+                        <label class="auth-checkbox" style="margin:8px 0 16px">
+                            <input type="checkbox" id="resize-lock-ratio" checked>
+                            <span class="checkmark"></span>
+                            <i class="fas fa-lock" style="color:var(--accent-light);font-size:0.85rem"></i> Lock Aspect Ratio
+                        </label>
+                        <div class="tool-option-row">
+                            <label>Format:</label>
+                            <select id="resize-format">
+                                <option value="jpeg">JPG</option>
+                                <option value="png">PNG</option>
+                                <option value="webp">WEBP</option>
+                            </select>
+                        </div>
+                        <div class="tool-option-row">
+                            <label>Quality:</label>
+                            <input type="range" id="resize-quality" min="0.1" max="1" step="0.05" value="0.92">
+                            <span id="resize-quality-val">92%</span>
+                        </div>
+                        <div class="resizer-output-info" id="resizer-output-info"></div>
+                        <div class="tool-action-bar">
+                            <button class="btn btn-outline btn-sm" id="btn-resizer-clear"><i class="fas fa-trash-alt"></i> Clear</button>
+                            <button class="btn btn-primary btn-lg" id="btn-resizer-download"><i class="fas fa-download"></i> Resize & Download</button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="f-email">Email Address <span class="required">*</span></label>
-                        <input type="email" id="f-email" placeholder="jane@example.com" autocomplete="email">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== RESUME PREVIEW MODAL ==================== -->
+    <div class="modal-overlay" id="resume-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3><i class="fas fa-file-alt"></i> Resume Preview</h3>
+                <div class="modal-actions">
+                    <button class="btn btn-primary btn-sm" id="btn-download-pdf">
+                        <i class="fas fa-download"></i> Download PDF
+                    </button>
+                    <button class="btn btn-outline btn-sm" id="btn-edit-resume">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button class="btn-modal-close" id="btn-close-resume-modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="resume-page" id="resume-page">
+                    <!-- Resume content rendered by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== PORTFOLIO PREVIEW MODAL ==================== -->
+    <div class="modal-overlay" id="portfolio-modal">
+        <div class="modal-container modal-full">
+            <div class="modal-header">
+                <h3><i class="fas fa-globe"></i> Portfolio Preview</h3>
+                <div class="modal-actions">
+                    <button class="btn btn-primary btn-sm" id="btn-download-portfolio">
+                        <i class="fas fa-download"></i> Download HTML
+                    </button>
+                    <button class="btn-modal-close" id="btn-close-portfolio-modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <iframe id="portfolio-iframe" title="Portfolio Preview"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== AI SUGGESTIONS MODAL ==================== -->
+    <div class="modal-overlay modal-sm-overlay" id="ai-modal">
+        <div class="modal-container modal-sm">
+            <div class="modal-header">
+                <h3><i class="fas fa-wand-magic-sparkles"></i> AI Suggestions</h3>
+                <button class="btn-modal-close" id="btn-close-ai-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="ai-loading" id="ai-loading">
+                    <div class="ai-spinner"></div>
+                    <p>Generating AI suggestions...</p>
+                </div>
+                <div class="ai-results" id="ai-results" style="display:none">
+                    <div class="ai-suggestion-list" id="ai-suggestion-list"></div>
+                    <div class="ai-actions">
+                        <button class="btn btn-primary btn-sm" id="btn-apply-ai">
+                            <i class="fas fa-check"></i> Apply Suggestion
+                        </button>
+                        <button class="btn btn-outline btn-sm" id="btn-regenerate-ai">
+                            <i class="fas fa-rotate"></i> Regenerate
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label for="f-phone">Phone Number</label>
-                        <input type="tel" id="f-phone" placeholder="+1 (555) 000-0000" autocomplete="tel">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== AUTH MODAL (Sign In / Sign Up) ==================== -->
+    <div class="modal-overlay" id="auth-modal">
+        <div class="modal-container modal-auth">
+            <button class="btn-modal-close" id="btn-close-auth-modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="auth-modal-inner">
+                <!-- Left decorative panel -->
+                <div class="auth-decor">
+                    <div class="auth-decor-orb auth-orb-1"></div>
+                    <div class="auth-decor-orb auth-orb-2"></div>
+                    <div class="auth-decor-content">
+                        <div class="auth-decor-icon"><i class="fas fa-bolt"></i></div>
+                        <h3>Resume<span>AI</span></h3>
+                        <p>Build stunning resumes &amp; portfolios in minutes with the power of AI.</p>
+                        <div class="auth-decor-features">
+                            <div class="auth-decor-feat"><i class="fas fa-check-circle"></i> AI-Powered Suggestions</div>
+                            <div class="auth-decor-feat"><i class="fas fa-check-circle"></i> 50+ Premium Templates</div>
+                            <div class="auth-decor-feat"><i class="fas fa-check-circle"></i> One-Click PDF Export</div>
+                            <div class="auth-decor-feat"><i class="fas fa-check-circle"></i> Portfolio Generator</div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="f-location">Location</label>
-                        <input type="text" id="f-location" placeholder="San Francisco, CA">
+                </div>
+
+                <!-- Right form panel -->
+                <div class="auth-form-panel">
+                    <!-- Tabs -->
+                    <div class="auth-tabs">
+                        <button class="auth-tab active" data-auth-tab="signin" id="auth-tab-signin">Sign In</button>
+                        <button class="auth-tab" data-auth-tab="signup" id="auth-tab-signup">Sign Up</button>
+                        <div class="auth-tab-indicator" id="auth-tab-indicator"></div>
                     </div>
-                    <div class="form-group">
-                        <label for="f-linkedin">LinkedIn URL</label>
-                        <input type="url" id="f-linkedin" placeholder="https://linkedin.com/in/janesmith">
+
+                    <!-- ===== SIGN IN FORM ===== -->
+                    <div class="auth-form active" id="auth-form-signin">
+                        <!-- Auth method tabs -->
+                        <div class="auth-method-tabs">
+                            <button class="auth-method-tab active" data-method="email" id="signin-method-email">
+                                <i class="fas fa-envelope"></i> Email
+                            </button>
+                            <button class="auth-method-tab" data-method="phone" id="signin-method-phone">
+                                <i class="fas fa-phone"></i> Phone
+                            </button>
+                        </div>
+
+                        <!-- Email sign in -->
+                        <div class="auth-method-content active" id="signin-email-content">
+                            <div class="form-group">
+                                <label for="signin-email"><i class="fas fa-envelope"></i> Email Address</label>
+                                <input type="email" id="signin-email" placeholder="you@example.com" autocomplete="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="signin-password"><i class="fas fa-lock"></i> Password</label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="signin-password" placeholder="Enter your password" autocomplete="current-password">
+                                    <button type="button" class="password-toggle" id="toggle-signin-password" aria-label="Toggle password visibility">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="auth-extras">
+                                <label class="auth-checkbox">
+                                    <input type="checkbox" id="remember-me">
+                                    <span class="checkmark"></span>
+                                    Remember me
+                                </label>
+                                <a href="#" class="auth-link" id="forgot-password-link">Forgot password?</a>
+                            </div>
+                        </div>
+
+                        <!-- Phone sign in -->
+                        <div class="auth-method-content" id="signin-phone-content">
+                            <div class="form-group">
+                                <label for="signin-phone"><i class="fas fa-phone"></i> Phone Number</label>
+                                <div class="phone-input-group">
+                                    <select id="signin-country-code" class="country-code-select">
+                                        <option value="+91">🇮🇳 +91</option>
+                                        <option value="+1">🇺🇸 +1</option>
+                                        <option value="+44">🇬🇧 +44</option>
+                                        <option value="+61">🇦🇺 +61</option>
+                                        <option value="+86">🇨🇳 +86</option>
+                                        <option value="+81">🇯🇵 +81</option>
+                                        <option value="+49">🇩🇪 +49</option>
+                                        <option value="+33">🇫🇷 +33</option>
+                                        <option value="+971">🇦🇪 +971</option>
+                                    </select>
+                                    <input type="tel" id="signin-phone" placeholder="Enter your phone number">
+                                </div>
+                            </div>
+                            <div class="otp-section" id="signin-otp-section" style="display:none">
+                                <label><i class="fas fa-shield-alt"></i> Enter OTP</label>
+                                <div class="otp-inputs">
+                                    <input type="text" maxlength="1" class="otp-box" data-otp-idx="0">
+                                    <input type="text" maxlength="1" class="otp-box" data-otp-idx="1">
+                                    <input type="text" maxlength="1" class="otp-box" data-otp-idx="2">
+                                    <input type="text" maxlength="1" class="otp-box" data-otp-idx="3">
+                                    <input type="text" maxlength="1" class="otp-box" data-otp-idx="4">
+                                    <input type="text" maxlength="1" class="otp-box" data-otp-idx="5">
+                                </div>
+                                <p class="otp-resend">Didn't get code? <a href="#" class="auth-link otp-resend-link">Resend OTP</a></p>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-lg auth-submit-btn" id="btn-signin-phone-otp">
+                                <i class="fas fa-paper-plane"></i> Send OTP
+                            </button>
+                        </div>
+
+                        <!-- Submit button for email -->
+                        <button type="button" class="btn btn-primary btn-lg auth-submit-btn" id="btn-signin-email-submit" style="margin-top:4px">
+                            <i class="fas fa-sign-in-alt"></i> Sign In
+                        </button>
+
+                        <!-- Divider -->
+                        <div class="auth-divider">
+                            <span>or continue with</span>
+                        </div>
+
+                        <!-- Social auth -->
+                        <div class="auth-social-buttons">
+                            <button type="button" class="btn-social btn-google" id="btn-google-signin">
+                                <svg viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                                <span>Google</span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="f-github">GitHub / Portfolio URL</label>
-                        <input type="url" id="f-github" placeholder="https://github.com/janesmith">
-                    </div>
-                    <div class="form-group span-2">
-                        <label for="f-summary">Professional Summary</label>
-                        <div class="textarea-wrap">
-                            <textarea id="f-summary" rows="4"
-                                placeholder="Write 2–3 sentences about your background, key skills, and what you bring to the table..."></textarea>
-                            <button class="ai-btn" data-field="f-summary" data-type="summary"
-                                onclick="openAIModal(this)">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                                    <path
-                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                </svg>
-                                Enhance with AI
+
+                    <!-- ===== SIGN UP FORM ===== -->
+                    <div class="auth-form" id="auth-form-signup">
+                        <!-- Auth method tabs -->
+                        <div class="auth-method-tabs">
+                            <button class="auth-method-tab active" data-method="email" id="signup-method-email">
+                                <i class="fas fa-envelope"></i> Email
+                            </button>
+                            <button class="auth-method-tab" data-method="phone" id="signup-method-phone">
+                                <i class="fas fa-phone"></i> Phone
+                            </button>
+                        </div>
+
+                        <!-- Email sign up -->
+                        <div class="auth-method-content active" id="signup-email-content">
+                            <div class="form-group">
+                                <label for="signup-name"><i class="fas fa-user"></i> Full Name</label>
+                                <input type="text" id="signup-name" placeholder="John Doe" autocomplete="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="signup-email"><i class="fas fa-envelope"></i> Email Address</label>
+                                <input type="email" id="signup-email" placeholder="you@example.com" autocomplete="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="signup-password"><i class="fas fa-lock"></i> Password</label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="signup-password" placeholder="Create a strong password" autocomplete="new-password">
+                                    <button type="button" class="password-toggle" id="toggle-signup-password" aria-label="Toggle password visibility">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="password-strength" id="password-strength">
+                                    <div class="strength-bar"><div class="strength-fill" id="strength-fill"></div></div>
+                                    <span class="strength-label" id="strength-label"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="signup-confirm-password"><i class="fas fa-lock"></i> Confirm Password</label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="signup-confirm-password" placeholder="Re-enter your password" autocomplete="new-password">
+                                    <button type="button" class="password-toggle" id="toggle-signup-confirm" aria-label="Toggle password visibility">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phone sign up -->
+                        <div class="auth-method-content" id="signup-phone-content">
+                            <div class="form-group">
+                                <label for="signup-phone-name"><i class="fas fa-user"></i> Full Name</label>
+                                <input type="text" id="signup-phone-name" placeholder="John Doe" autocomplete="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="signup-phone"><i class="fas fa-phone"></i> Phone Number</label>
+                                <div class="phone-input-group">
+                                    <select id="signup-country-code" class="country-code-select">
+                                        <option value="+91">🇮🇳 +91</option>
+                                        <option value="+1">🇺🇸 +1</option>
+                                        <option value="+44">🇬🇧 +44</option>
+                                        <option value="+61">🇦🇺 +61</option>
+                                        <option value="+86">🇨🇳 +86</option>
+                                        <option value="+81">🇯🇵 +81</option>
+                                        <option value="+49">🇩🇪 +49</option>
+                                        <option value="+33">🇫🇷 +33</option>
+                                        <option value="+971">🇦🇪 +971</option>
+                                    </select>
+                                    <input type="tel" id="signup-phone" placeholder="Enter your phone number">
+                                </div>
+                            </div>
+                            <div class="otp-section" id="signup-otp-section" style="display:none">
+                                <label><i class="fas fa-shield-alt"></i> Enter OTP</label>
+                                <div class="otp-inputs">
+                                    <input type="text" maxlength="1" class="otp-box" data-otp-idx="0">
+                                    <input type="text" maxlength="1" class="otp-box" data-otp-idx="1">
+                                    <input type="text" maxlength="1" class="otp-box" data-otp-idx="2">
+                                    <input type="text" maxlength="1" class="otp-box" data-otp-idx="3">
+                                    <input type="text" maxlength="1" class="otp-box" data-otp-idx="4">
+                                    <input type="text" maxlength="1" class="otp-box" data-otp-idx="5">
+                                </div>
+                                <p class="otp-resend">Didn't get code? <a href="#" class="auth-link otp-resend-link">Resend OTP</a></p>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-lg auth-submit-btn" id="btn-signup-phone-otp">
+                                <i class="fas fa-paper-plane"></i> Send OTP
+                            </button>
+                        </div>
+
+                        <!-- Submit button for email signup -->
+                        <button type="button" class="btn btn-primary btn-lg auth-submit-btn" id="btn-signup-email-submit" style="margin-top:4px">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+
+                        <div class="auth-terms">
+                            By signing up, you agree to our <a href="#" class="auth-link">Terms of Service</a> and <a href="#" class="auth-link">Privacy Policy</a>.
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="auth-divider">
+                            <span>or continue with</span>
+                        </div>
+
+                        <!-- Social auth -->
+                        <div class="auth-social-buttons">
+                            <button type="button" class="btn-social btn-google" id="btn-google-signup">
+                                <svg viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                                <span>Google</span>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- STEP 2: EDUCATION -->
-            <div class="form-step" id="step-2">
-                <div class="step-header">
-                    <div class="step-emoji">🎓</div>
-                    <h2>Education</h2>
-                    <p>Add your degrees and educational background. Most recent first.</p>
-                </div>
-                <div id="education-entries"></div>
-                <button class="add-entry-btn" id="add-education-btn">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5">
-                        <line x1="12" y1="5" x2="12" y2="19" />
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                    </svg>
-                    Add Another Degree
-                </button>
-            </div>
-
-            <!-- STEP 3: EXPERIENCE -->
-            <div class="form-step" id="step-3">
-                <div class="step-header">
-                    <div class="step-emoji">💼</div>
-                    <h2>Work Experience</h2>
-                    <p>Your work history — the heart of your resume. Most recent first.</p>
-                </div>
-                <div id="experience-entries"></div>
-                <button class="add-entry-btn" id="add-experience-btn">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5">
-                        <line x1="12" y1="5" x2="12" y2="19" />
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                    </svg>
-                    Add Another Position
-                </button>
-            </div>
-
-            <!-- STEP 4: SKILLS -->
-            <div class="form-step" id="step-4">
-                <div class="step-header">
-                    <div class="step-emoji">⚡</div>
-                    <h2>Skills</h2>
-                    <p>Type a skill and press <kbd>Enter</kbd> or <kbd>,</kbd> to add it as a tag.</p>
-                </div>
-                <div class="skills-form">
-                    <div class="skill-group-form">
-                        <label>Technical Skills</label>
-                        <p class="skill-hint">Programming languages, frameworks, databases...</p>
-                        <div class="tag-input-container">
-                            <div class="tags-display" id="tags-technical"></div>
-                            <input type="text" id="input-technical" class="tag-input"
-                                placeholder="e.g. Python, React, PostgreSQL...">
-                        </div>
-                    </div>
-                    <div class="skill-group-form">
-                        <label>Tools & Technologies</label>
-                        <p class="skill-hint">Software, platforms, cloud services...</p>
-                        <div class="tag-input-container">
-                            <div class="tags-display" id="tags-tools"></div>
-                            <input type="text" id="input-tools" class="tag-input"
-                                placeholder="e.g. Git, Docker, AWS, Figma...">
-                        </div>
-                    </div>
-                    <div class="skill-group-form">
-                        <label>Soft Skills</label>
-                        <p class="skill-hint">Leadership, communication, problem-solving...</p>
-                        <div class="tag-input-container">
-                            <div class="tags-display" id="tags-soft"></div>
-                            <input type="text" id="input-soft" class="tag-input"
-                                placeholder="e.g. Team Leadership, Communication...">
-                        </div>
-                    </div>
-                    <div class="skill-group-form">
-                        <label>Languages</label>
-                        <p class="skill-hint">Include proficiency level</p>
-                        <div class="tag-input-container">
-                            <div class="tags-display" id="tags-languages"></div>
-                            <input type="text" id="input-languages" class="tag-input"
-                                placeholder="e.g. English (Native), French (Fluent)...">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- STEP 5: PROJECTS -->
-            <div class="form-step" id="step-5">
-                <div class="step-header">
-                    <div class="step-emoji">🔬</div>
-                    <h2>Projects</h2>
-                    <p>Showcase your notable projects, side projects, or open source contributions.</p>
-                </div>
-                <div id="project-entries"></div>
-                <button class="add-entry-btn" id="add-project-btn">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5">
-                        <line x1="12" y1="5" x2="12" y2="19" />
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                    </svg>
-                    Add Another Project
-                </button>
-            </div>
-
-            <!-- STEP 6: CERTS & ACHIEVEMENTS -->
-            <div class="form-step" id="step-6">
-                <div class="step-header">
-                    <div class="step-emoji">🏆</div>
-                    <h2>Certifications & Achievements</h2>
-                    <p>Let your accomplishments speak for you.</p>
-                </div>
-                <div class="two-col-form">
-                    <div class="subsection-form">
-                        <h3>Certifications</h3>
-                        <p class="skill-hint">Professional certifications, licenses, or courses</p>
-                        <div id="cert-entries"></div>
-                        <button class="add-entry-btn small" id="add-cert-btn">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2.5">
-                                <line x1="12" y1="5" x2="12" y2="19" />
-                                <line x1="5" y1="12" x2="19" y2="12" />
-                            </svg>
-                            Add Certification
-                        </button>
-                    </div>
-                    <div class="subsection-form">
-                        <h3>Achievements & Awards</h3>
-                        <p class="skill-hint">Awards, honors, publications, or notable accomplishments</p>
-                        <div id="achievement-entries"></div>
-                        <button class="add-entry-btn small" id="add-achievement-btn">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2.5">
-                                <line x1="12" y1="5" x2="12" y2="19" />
-                                <line x1="5" y1="12" x2="19" y2="12" />
-                            </svg>
-                            Add Achievement
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- STEP 7: TEMPLATE -->
-            <div class="form-step" id="step-7">
-                <div class="step-header">
-                    <div class="step-emoji">🎨</div>
-                    <h2>Choose Your Template</h2>
-                    <p>Select a design that best represents your professional style.</p>
-                </div>
-                <div class="template-picker" id="template-picker">
-                    <label class="template-option" data-value="nexus">
-                        <input type="radio" name="template" value="nexus" checked>
-                        <div class="template-option-card">
-                            <div class="template-preview nexus-preview">
-                                <div class="tp-sidebar">
-                                    <div class="tp-block"></div>
-                                    <div class="tp-line"></div>
-                                    <div class="tp-line short"></div>
-                                    <div class="tp-divider"></div>
-                                    <div class="tp-line short"></div>
-                                    <div class="tp-line short"></div>
-                                </div>
-                                <div class="tp-main">
-                                    <div class="tp-name"></div>
-                                    <div class="tp-line medium"></div>
-                                    <div class="tp-section-head"></div>
-                                    <div class="tp-line wide"></div>
-                                    <div class="tp-line medium"></div>
-                                    <div class="tp-section-head"></div>
-                                    <div class="tp-line wide"></div>
-                                </div>
-                            </div>
-                            <div class="template-option-label">
-                                <strong>Nexus</strong>
-                                <span>Modern Two-Column</span>
-                            </div>
-                            <div class="template-option-check">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="3">
-                                    <path d="M20 6L9 17l-5-5" />
-                                </svg>
-                            </div>
-                        </div>
-                    </label>
-                    <label class="template-option" data-value="clarity">
-                        <input type="radio" name="template" value="clarity">
-                        <div class="template-option-card">
-                            <div class="template-preview clarity-preview">
-                                <div class="tp-inner">
-                                    <div class="tp-name-full"></div>
-                                    <div class="tp-line medium center"></div>
-                                    <div class="tp-hr"></div>
-                                    <div class="tp-section-head clarity"></div>
-                                    <div class="tp-line wide"></div>
-                                    <div class="tp-line medium"></div>
-                                    <div class="tp-section-head clarity"></div>
-                                    <div class="tp-line wide"></div>
-                                </div>
-                            </div>
-                            <div class="template-option-label">
-                                <strong>Clarity</strong>
-                                <span>Classic Professional</span>
-                            </div>
-                            <div class="template-option-check">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="3">
-                                    <path d="M20 6L9 17l-5-5" />
-                                </svg>
-                            </div>
-                        </div>
-                    </label>
-                    <label class="template-option" data-value="canvas">
-                        <input type="radio" name="template" value="canvas">
-                        <div class="template-option-card">
-                            <div class="template-preview canvas-preview">
-                                <div class="tp-inner">
-                                    <div class="tp-canvas-name"></div>
-                                    <div class="tp-line medium"></div>
-                                    <div class="tp-section-head canvas"></div>
-                                    <div class="tp-line wide"></div>
-                                    <div class="tp-line medium"></div>
-                                    <div class="tp-section-head canvas"></div>
-                                    <div class="tp-tags">
-                                        <div class="tp-tag"></div>
-                                        <div class="tp-tag"></div>
-                                        <div class="tp-tag short"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="template-option-label">
-                                <strong>Canvas</strong>
-                                <span>Minimalist Clean</span>
-                            </div>
-                            <div class="template-option-check">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="3">
-                                    <path d="M20 6L9 17l-5-5" />
-                                </svg>
-                            </div>
-                        </div>
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <div class="builder-footer">
-            <button class="btn-outline" id="prev-btn" onclick="changeStep(-1)" disabled>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 12H5M12 19l-7-7 7-7" />
-                </svg>
-                Previous
-            </button>
-            <button class="btn-primary" id="next-btn" onclick="changeStep(1)">
-                Next Step
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-            </button>
         </div>
     </div>
 
-    <!-- ===== VIEW: PREVIEW ===== -->
-    <div id="view-preview" class="view">
-        <div class="preview-topbar">
-            <button class="btn-ghost btn-sm" onclick="showView('builder')">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
-                    <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
-                </svg>
-                Edit Details
-            </button>
-            <h2 class="preview-title">Your Resume</h2>
-            <div class="preview-actions">
-                <button class="btn-outline btn-sm" id="portfolio-btn" onclick="openPortfolio()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10" />
-                        <path
-                            d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
-                    </svg>
-                    View Portfolio
-                </button>
-                <button class="btn-primary btn-sm" id="download-btn" onclick="downloadPDF()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-                        <polyline points="7 10 12 15 17 10" />
-                        <line x1="12" y1="15" x2="12" y2="3" />
-                    </svg>
-                    Download PDF
-                </button>
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="nav-logo">
+                        <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                        <span>Resume<span class="accent">AI</span></span>
+                    </a>
+                    <p>Build professional resumes and portfolios effortlessly with AI-powered tools.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="#home">Home</a>
+                    <a href="#features">Features</a>
+                    <a href="#builder">Builder</a>
+                    <a href="#templates">Templates</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="#">Resume Tips</a>
+                    <a href="#">Career Advice</a>
+                    <a href="#">Interview Guide</a>
+                    <a href="#">Blog</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ResumeAI. Built with <i class="fas fa-heart" style="color:var(--accent)"></i> — All
+                    rights reserved.</p>
             </div>
         </div>
+    </footer>
 
-        <div class="preview-layout">
-            <div class="preview-sidebar-panel">
-                <div class="sidebar-section">
-                    <h4>Template</h4>
-                    <div class="template-switcher" id="template-switcher">
-                        <button class="switch-btn active" data-template="nexus"
-                            onclick="switchTemplate('nexus')">Nexus</button>
-                        <button class="switch-btn" data-template="clarity"
-                            onclick="switchTemplate('clarity')">Clarity</button>
-                        <button class="switch-btn" data-template="canvas"
-                            onclick="switchTemplate('canvas')">Canvas</button>
-                    </div>
-                </div>
-                <div class="sidebar-section">
-                    <h4>AI Tools</h4>
-                    <button class="tool-btn" id="ai-review-btn" onclick="runAIReview()">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        AI Resume Review
-                    </button>
-                    <button class="tool-btn" onclick="openPortfolio()">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M2 12h20" />
-                        </svg>
-                        Generate Portfolio
-                    </button>
-                </div>
-                <div class="sidebar-section">
-                    <h4>Actions</h4>
-                    <button class="tool-btn accent" onclick="downloadPDF()">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-                            <polyline points="7 10 12 15 17 10" />
-                            <line x1="12" y1="15" x2="12" y2="3" />
-                        </svg>
-                        Download PDF
-                    </button>
-                    <button class="tool-btn" onclick="showView('builder')">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
-                            <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
-                        </svg>
-                        Edit Resume
-                    </button>
-                </div>
-            </div>
+    <!-- ==================== TOAST NOTIFICATION ==================== -->
+    <div class="toast-container" id="toast-container"></div>
 
-            <div class="preview-canvas">
-                <div id="resume-output"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== AI MODAL ===== -->
-    <div class="modal-overlay" id="ai-modal" onclick="closeModal(event)">
-        <div class="modal-box">
-            <div class="modal-header">
-                <div class="modal-title">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#00d4ff">
-                        <path
-                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                    AI Enhancement
-                </div>
-                <button class="modal-close-btn" onclick="closeAIModal()">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="6" x2="6" y2="18" />
-                        <line x1="6" y1="6" x2="18" y2="18" />
-                    </svg>
-                </button>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <div class="ai-loading">
-                    <div class="ai-spinner"></div>
-                    <p>Analyzing your content...</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== AI REVIEW MODAL ===== -->
-    <div class="modal-overlay" id="review-modal" onclick="closeModal(event)">
-        <div class="modal-box modal-large">
-            <div class="modal-header">
-                <div class="modal-title">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#00d4ff">
-                        <path
-                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                    AI Resume Review
-                </div>
-                <button class="modal-close-btn" onclick="closeReviewModal()">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="6" x2="6" y2="18" />
-                        <line x1="6" y1="6" x2="18" y2="18" />
-                    </svg>
-                </button>
-            </div>
-            <div class="modal-body" id="review-modal-body">
-                <div class="ai-loading">
-                    <div class="ai-spinner"></div>
-                    <p>Reviewing your resume...</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== AUTH MODAL ===== -->
-    <div class="modal-overlay" id="auth-modal" onclick="closeAuthModal(event)">
-        <div class="auth-box">
-            <button class="modal-close-btn auth-close" onclick="closeAuthModal()">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-            </button>
-
-            <div class="auth-brand">
-                <div class="auth-brand-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="url(#ag)"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <defs>
-                            <linearGradient id="ag" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#00d4ff" />
-                                <stop offset="1" stop-color="#7c3aed" />
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                </div>
-                <span>Resume With Devil <span style="color:#00d4ff">AI</span></span>
-            </div>
-
-            <div class="auth-tabs">
-                <button class="auth-tab active" id="tab-signin" onclick="switchAuthTab('signin')">Sign In</button>
-                <button class="auth-tab" id="tab-signup" onclick="switchAuthTab('signup')">Sign Up</button>
-            </div>
-
-            <!-- Google button -->
-            <button class="google-btn" onclick="googleAuth()">
-                <svg width="18" height="18" viewBox="0 0 24 24">
-                    <path fill="#4285F4"
-                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                    <path fill="#34A853"
-                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                    <path fill="#FBBC05"
-                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                    <path fill="#EA4335"
-                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                </svg>
-                Continue with Google
-            </button>
-
-            <div class="auth-divider"><span>or continue with email</span></div>
-
-            <!-- SIGN IN FORM -->
-            <form id="signin-form" class="auth-form" onsubmit="handleSignIn(event)">
-                <div class="auth-field">
-                    <label>Email Address</label>
-                    <div class="auth-input-wrap">
-                        <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                            <polyline points="22,6 12,13 2,6" />
-                        </svg>
-                        <input type="email" id="si-email" placeholder="you@example.com" required autocomplete="email">
-                    </div>
-                </div>
-                <div class="auth-field">
-                    <label>Password</label>
-                    <div class="auth-input-wrap">
-                        <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                            <path d="M7 11V7a5 5 0 0110 0v4" />
-                        </svg>
-                        <input type="password" id="si-password" placeholder="Enter your password" required
-                            autocomplete="current-password">
-                        <button type="button" class="toggle-pw"
-                            onclick="togglePassword('si-password', this)">👁</button>
-                    </div>
-                </div>
-                <div class="auth-row">
-                    <label class="auth-check"><input type="checkbox" id="si-remember"> Remember me</label>
-                    <a href="#" class="auth-link" onclick="showForgotPassword()">Forgot password?</a>
-                </div>
-                <button type="submit" class="auth-submit-btn" id="si-submit">Sign In</button>
-                <p class="auth-switch">Don't have an account? <a href="#" onclick="switchAuthTab('signup')">Sign up
-                        free</a></p>
-            </form>
-
-            <!-- SIGN UP FORM -->
-            <form id="signup-form" class="auth-form" style="display:none" onsubmit="handleSignUp(event)">
-                <div class="auth-field">
-                    <label>Full Name <span style="color:#00d4ff">*</span></label>
-                    <div class="auth-input-wrap">
-                        <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-                            <circle cx="12" cy="7" r="4" />
-                        </svg>
-                        <input type="text" id="su-name" placeholder="Jane Smith" required autocomplete="name">
-                    </div>
-                </div>
-                <div class="auth-field">
-                    <label>Email Address <span style="color:#00d4ff">*</span></label>
-                    <div class="auth-input-wrap">
-                        <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                            <polyline points="22,6 12,13 2,6" />
-                        </svg>
-                        <input type="email" id="su-email" placeholder="you@example.com" required autocomplete="email">
-                    </div>
-                </div>
-                <div class="auth-field">
-                    <label>Phone Number</label>
-                    <div class="auth-input-wrap phone-wrap">
-                        <div class="country-code">
-                            <span>🇮🇳</span><span>+91</span>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <polyline points="6 9 12 15 18 9" />
-                            </svg>
-                        </div>
-                        <input type="tel" id="su-phone" placeholder="98765 43210" autocomplete="tel"
-                            style="padding-left:90px">
-                    </div>
-                </div>
-                <div class="auth-field">
-                    <label>Password <span style="color:#00d4ff">*</span></label>
-                    <div class="auth-input-wrap">
-                        <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                            <path d="M7 11V7a5 5 0 0110 0v4" />
-                        </svg>
-                        <input type="password" id="su-password" placeholder="Min. 8 characters" required
-                            autocomplete="new-password" oninput="checkPasswordStrength(this.value)">
-                        <button type="button" class="toggle-pw"
-                            onclick="togglePassword('su-password', this)">👁</button>
-                    </div>
-                    <div class="pw-strength" id="pw-strength">
-                        <div class="pw-bar" id="pw-bar"></div>
-                    </div>
-                    <span class="pw-label" id="pw-label"></span>
-                </div>
-                <div class="auth-field">
-                    <label>Confirm Password <span style="color:#00d4ff">*</span></label>
-                    <div class="auth-input-wrap">
-                        <svg class="auth-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                            <path d="M7 11V7a5 5 0 0110 0v4" />
-                        </svg>
-                        <input type="password" id="su-confirm" placeholder="Re-enter password" required
-                            autocomplete="new-password">
-                    </div>
-                </div>
-                <label class="auth-check" style="margin-bottom:16px">
-                    <input type="checkbox" id="su-terms" required> I agree to the <a href="#" class="auth-link">Terms of
-                        Service</a> &amp; <a href="#" class="auth-link">Privacy Policy</a>
-                </label>
-                <button type="submit" class="auth-submit-btn" id="su-submit">Create Account</button>
-                <p class="auth-switch">Already have an account? <a href="#" onclick="switchAuthTab('signin')">Sign
-                        in</a></p>
-            </form>
-        </div>
-    </div>
-
-    <script src="js/app.js"></script>
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        // Configure pdf.js worker
+        if (window.pdfjsLib) {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        }
+    </script>
+    <script src="app.js"></script>
 </body>
 
 </html>
